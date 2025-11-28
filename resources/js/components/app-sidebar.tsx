@@ -13,14 +13,54 @@ import {
 import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import {
+    BadgePercent,
+    BarChart3,
+    BookOpen,
+    Folder,
+    LayoutGrid,
+    Package,
+    ShoppingBag,
+    Truck,
+    Users,
+} from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
+        title: 'Dasbor',
         href: dashboard(),
         icon: LayoutGrid,
+    },
+    {
+        title: 'Pesanan',
+        href: '/orders',
+        icon: ShoppingBag,
+    },
+    {
+        title: 'Antar Jemput',
+        href: '/pickups',
+        icon: Truck,
+    },
+    {
+        title: 'Pelanggan',
+        href: '/customers',
+        icon: Users,
+    },
+    {
+        title: 'Layanan & Harga',
+        href: '/services',
+        icon: BadgePercent,
+    },
+    {
+        title: 'Inventaris',
+        href: '/inventory',
+        icon: Package,
+    },
+    {
+        title: 'Laporan',
+        href: '/reports',
+        icon: BarChart3,
     },
 ];
 
