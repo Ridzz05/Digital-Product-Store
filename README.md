@@ -1,25 +1,33 @@
-# Laravel + React Starter Kit
+# Laundry Service Management (Laravel + React)
 
-## Introduction
+## Ringkasan
 
-Our React starter kit provides a robust, modern starting point for building Laravel applications with a React frontend using [Inertia](https://inertiajs.com).
+Aplikasi manajemen layanan laundry berbasis Laravel + React (Inertia) dengan fokus pada operasional sehari-hari: pesanan, antar-jemput, pelanggan, layanan & harga, inventaris, dan laporan. UI menggunakan React 19, TypeScript, Tailwind, serta komponen shadcn/ui + Radix.
 
-Inertia allows you to build modern, single-page React applications using classic server-side routing and controllers. This lets you enjoy the frontend power of React combined with the incredible backend productivity of Laravel and lightning-fast Vite compilation.
+## Fitur utama
 
-This React starter kit utilizes React 19, TypeScript, Tailwind, and the [shadcn/ui](https://ui.shadcn.com) and [radix-ui](https://www.radix-ui.com) component libraries.
+- Dasbor operasional dengan KPI pesanan, SLA antar-jemput, layanan terlaris, stok rendah, dan ringkasan laporan.  
+- Modul Pesanan: pantau status, pembayaran, dan estimasi selesai.  
+- Modul Antar Jemput: jadwal kurir, rute/zona, dan pemantauan SLA.  
+- Modul Pelanggan: profil, segmentasi, dan metrik repeat order.  
+- Modul Layanan & Harga: paket, SLA, promo/bundle, dan SOP kualitas.  
+- Modul Inventaris: stok bahan habis pakai, prioritas restock, dan tren pemakaian.  
+- Modul Laporan: pendapatan, konversi, repeat order, dan horizon laporan.
 
-## Official Documentation
+## Teknologi
 
-Documentation for all Laravel starter kits can be found on the [Laravel website](https://laravel.com/docs/starter-kits).
+- Laravel + Inertia  
+- React 19 + TypeScript  
+- TailwindCSS + shadcn/ui + Radix UI  
+- Vite untuk bundling & dev server
 
-## Contributing
+## Menjalankan secara lokal (ringkas)
 
-Thank you for considering contributing to our starter kit! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+1) Install dependensi PHP & JS: `composer install && npm install`  
+2) Siapkan environment: salin `.env` dan jalankan `php artisan key:generate`  
+3) Jalankan database & migrasi sesuai kebutuhan.  
+4) Dev server: `php artisan serve` dan `npm run dev` (atau `npm run build` untuk produksi).  
 
-## Code of Conduct
+## Lisensi
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## License
-
-The Laravel + React starter kit is open-sourced software licensed under the MIT license.
+Berbasis MIT (mengacu pada Laravel + React Starter Kit).***
