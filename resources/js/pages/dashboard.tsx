@@ -6,15 +6,12 @@ import { dashboard } from '@/routes';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link } from '@inertiajs/react';
 import {
-    Activity,
     ArrowUpRight,
-    CircleCheck,
-    Clock,
-    Coins,
-    PackageMinus,
-    Shirt,
-    Truck,
-    Users,
+    Box,
+    PackageCheck,
+    PackageX,
+    ShoppingBag,
+    TrendingUp,
 } from 'lucide-react';
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -26,64 +23,51 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 const ringkasanKpi = [
     {
-        title: 'Pesanan aktif',
-        value: '128',
-        change: '+12% dibanding kemarin',
-        icon: Activity,
+        title: 'Total Produk',
+        value: '20',
+        change: '4 kategori tersedia',
+        icon: Box,
+        accent: 'bg-blue-100 text-blue-900 dark:bg-blue-500/20 dark:text-blue-100',
+        href: '/admin/products',
+    },
+    {
+        title: 'Produk Aktif',
+        value: '16',
+        change: '80% dari total produk',
+        icon: PackageCheck,
         accent: 'bg-emerald-100 text-emerald-900 dark:bg-emerald-500/20 dark:text-emerald-100',
-        href: '/orders',
+        href: '/admin/products',
     },
     {
-        title: 'Antar jemput hari ini',
-        value: '24',
-        change: '18 diantar • 6 dijemput',
-        icon: Truck,
-        accent: 'bg-sky-100 text-sky-900 dark:bg-sky-500/20 dark:text-sky-100',
-        href: '/pickups',
-    },
-    {
-        title: 'Pelanggan baru',
-        value: '36',
-        change: 'dalam 7 hari terakhir',
-        icon: Users,
-        accent: 'bg-indigo-100 text-indigo-900 dark:bg-indigo-500/20 dark:text-indigo-100',
-        href: '/customers',
-    },
-    {
-        title: 'Perkiraan omzet',
-        value: 'Rp 42,5 jt',
-        change: 'bulan berjalan',
-        icon: Coins,
+        title: 'Produk Nonaktif',
+        value: '4',
+        change: 'Tidak ditampilkan di publik',
+        icon: PackageX,
         accent: 'bg-amber-100 text-amber-900 dark:bg-amber-500/25 dark:text-amber-100',
-        href: '/reports',
+        href: '/admin/products',
+    },
+    {
+        title: 'Total Stok',
+        value: '3.463',
+        change: 'Stok digital tersedia',
+        icon: ShoppingBag,
+        accent: 'bg-purple-100 text-purple-900 dark:bg-purple-500/20 dark:text-purple-100',
+        href: '/admin/products',
     },
 ];
 
-const pesananTerbaru = [
-    { kode: 'ORD-9172', nama: 'Riko Pratama', layanan: 'Cuci Lipat', status: 'Proses', estimasi: 'Hari ini, 17.00' },
-    { kode: 'ORD-9171', nama: 'Sari Dewi', layanan: 'Dry Clean', status: 'Menunggu', estimasi: 'Besok, 10.00' },
-    { kode: 'ORD-9168', nama: 'Andre Putra', layanan: 'Express', status: 'Diantar', estimasi: 'Hari ini, 15.30' },
-    { kode: 'ORD-9165', nama: 'Lia Chan', layanan: 'Cuci Setrika', status: 'Selesai', estimasi: 'Selesai' },
+const produkTerbaru = [
+    { nama: 'Synchronised systemic attitude', kategori: 'Theme', harga: 'Rp 1.164.421', status: 'Aktif' },
+    { nama: 'Automated homogeneous groupware', kategori: 'Template', harga: 'Rp 1.423.820', status: 'Aktif' },
+    { nama: 'Multi-tiered user-facing contingency', kategori: 'Plugin', harga: 'Rp 970.527', status: 'Aktif' },
+    { nama: 'Monitored eco-centric extranet', kategori: 'Audio', harga: 'Rp 895.349', status: 'Nonaktif' },
 ];
 
-const jadwalKurir = [
-    { nama: 'Bima • Kurir A', alamat: 'Jl. Merpati No. 4', waktu: '09.00 - 10.00', tipe: 'Jemput' },
-    { nama: 'Rara • Kurir B', alamat: 'Apartemen Aruna, Tower 2', waktu: '11.00 - 12.00', tipe: 'Antar' },
-    { nama: 'Dodi • Kurir A', alamat: 'Jl. Melati Raya 18', waktu: '14.00 - 15.00', tipe: 'Antar' },
-    { nama: 'Intan • Kurir C', alamat: 'Cluster Cempaka 2', waktu: '16.00 - 17.00', tipe: 'Jemput' },
-];
-
-const layananPopuler = [
-    { nama: 'Cuci + Setrika', porsi: '48%', jumlah: 320 },
-    { nama: 'Express 6 jam', porsi: '22%', jumlah: 146 },
-    { nama: 'Dry Clean', porsi: '18%', jumlah: 119 },
-    { nama: 'Cuci Lipat', porsi: '12%', jumlah: 82 },
-];
-
-const stokRendah = [
-    { nama: 'Detergen cair', status: 'Sisa 12 L' },
-    { nama: 'Plastik laundry', status: 'Sisa 45 pcs' },
-    { nama: 'Pewangi', status: 'Sisa 8 L' },
+const kategoriPopuler = [
+    { nama: 'Theme', jumlah: 5, porsi: '25%' },
+    { nama: 'Template', jumlah: 4, porsi: '20%' },
+    { nama: 'Plugin', jumlah: 4, porsi: '20%' },
+    { nama: 'Graphics', jumlah: 3, porsi: '15%' },
 ];
 
 export default function Dashboard() {
@@ -91,30 +75,26 @@ export default function Dashboard() {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Dasbor" />
             <div className="flex h-full flex-1 flex-col gap-6 overflow-x-hidden rounded-xl p-4">
-                <div className="relative overflow-hidden rounded-2xl border border-sidebar-border/70 bg-gradient-to-br from-neutral-100 via-white to-amber-50 dark:from-neutral-900 dark:via-neutral-950 dark:to-amber-950/30">
+                <div className="relative overflow-hidden rounded-2xl border border-sidebar-border/70 bg-gradient-to-br from-neutral-100 via-white to-blue-50 dark:from-neutral-900 dark:via-neutral-950 dark:to-blue-950/30">
                     <div className="absolute inset-0 opacity-50">
                         <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/10 dark:stroke-neutral-100/10" />
                     </div>
                     <div className="relative flex flex-col gap-3 p-6 lg:flex-row lg:items-center lg:justify-between">
                         <div>
                             <p className="text-sm text-muted-foreground">
-                                Ringkasan operasional
+                                Ringkasan Produk Digital
                             </p>
                             <h1 className="text-2xl font-semibold leading-tight text-foreground lg:text-3xl">
-                                Selamat datang di Dasbor Laundry
+                                Selamat datang di RDStore
                             </h1>
                             <p className="text-sm text-muted-foreground">
-                                Pantau pesanan, antar jemput, pelanggan, dan stok dalam satu tempat.
+                                Kelola produk digital Anda dan pantau performa penjualan.
                             </p>
                         </div>
                         <div className="flex items-center gap-3">
                             <Badge className="gap-2 bg-emerald-100 text-emerald-900 dark:bg-emerald-500/20 dark:text-emerald-100">
-                                <CircleCheck className="h-3.5 w-3.5" />
-                                SLA Hari Ini: 96% terpenuhi
-                            </Badge>
-                            <Badge variant="outline" className="gap-2">
-                                <Clock className="h-3.5 w-3.5" />
-                                Cutoff antar berikutnya 17.00
+                                <TrendingUp className="h-3.5 w-3.5" />
+                                16 produk aktif
                             </Badge>
                         </div>
                     </div>
@@ -150,38 +130,39 @@ export default function Dashboard() {
                     <Card className="overflow-hidden">
                         <CardHeader className="flex flex-row items-center justify-between">
                             <div>
-                                <CardTitle>Pesanan terbaru</CardTitle>
-                                <CardDescription>Pantau status pesanan yang baru masuk.</CardDescription>
+                                <CardTitle>Produk Terbaru</CardTitle>
+                                <CardDescription>Produk yang baru ditambahkan ke katalog.</CardDescription>
                             </div>
-                            <Badge variant="outline">Realtime</Badge>
+                            <Link href="/admin/products">
+                                <Badge variant="outline" className="cursor-pointer hover:bg-muted">
+                                    Lihat Semua
+                                </Badge>
+                            </Link>
                         </CardHeader>
                         <CardContent className="divide-y divide-border/70">
-                            {pesananTerbaru.map((item) => (
+                            {produkTerbaru.map((item, idx) => (
                                 <div
-                                    key={item.kode}
+                                    key={`${item.nama}-${idx}`}
                                     className="flex items-start gap-3 py-3 first:pt-0 last:pb-0"
                                 >
                                     <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-muted text-sm font-medium">
-                                        {item.kode.split('-')[1]}
+                                        <Box className="h-5 w-5" />
                                     </div>
                                     <div className="flex flex-1 flex-col gap-1">
                                         <div className="flex items-center justify-between gap-2">
                                             <div>
                                                 <p className="font-medium">{item.nama}</p>
                                                 <p className="text-sm text-muted-foreground">
-                                                    {item.kode} • {item.layanan}
+                                                    {item.kategori} • {item.harga}
                                                 </p>
                                             </div>
                                             <Badge
-                                                variant={item.status === 'Selesai' ? 'secondary' : 'default'}
+                                                variant={item.status === 'Aktif' ? 'default' : 'secondary'}
                                                 className="capitalize"
                                             >
                                                 {item.status}
                                             </Badge>
                                         </div>
-                                        <p className="text-xs text-muted-foreground">
-                                            Estimasi: {item.estimasi}
-                                        </p>
                                     </div>
                                 </div>
                             ))}
@@ -190,92 +171,24 @@ export default function Dashboard() {
 
                     <Card className="overflow-hidden">
                         <CardHeader>
-                            <CardTitle>Antar jemput hari ini</CardTitle>
-                            <CardDescription>Jadwal kurir dan alamat tujuan.</CardDescription>
+                            <CardTitle>Kategori Populer</CardTitle>
+                            <CardDescription>Distribusi produk per kategori.</CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-3">
-                            {jadwalKurir.map((item, idx) => (
+                            {kategoriPopuler.map((item, idx) => (
                                 <div
                                     key={`${item.nama}-${idx}`}
                                     className="rounded-xl border border-border/70 p-3"
                                 >
-                                    <div className="flex items-start justify-between gap-2">
-                                        <div className="space-y-0.5">
+                                    <div className="flex items-center justify-between">
+                                        <div>
                                             <p className="font-medium">{item.nama}</p>
                                             <p className="text-sm text-muted-foreground">
-                                                {item.alamat}
+                                                {item.jumlah} produk
                                             </p>
                                         </div>
-                                        <Badge
-                                            variant="secondary"
-                                            className={item.tipe === 'Antar' ? 'bg-emerald-100 text-emerald-900 dark:bg-emerald-500/20 dark:text-emerald-100' : 'bg-sky-100 text-sky-900 dark:bg-sky-500/20 dark:text-sky-100'}
-                                        >
-                                            {item.tipe}
-                                        </Badge>
+                                        <Badge variant="outline">{item.porsi}</Badge>
                                     </div>
-                                    <p className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
-                                        <Clock className="h-4 w-4" />
-                                        {item.waktu}
-                                    </p>
-                                </div>
-                            ))}
-                        </CardContent>
-                    </Card>
-                </section>
-
-                <section className="grid gap-4 xl:grid-cols-3">
-                    <Card className="xl:col-span-2">
-                        <CardHeader className="flex flex-row items-center justify-between">
-                            <div>
-                                <CardTitle>Layanan terlaris</CardTitle>
-                                <CardDescription>Berdasarkan 7 hari terakhir.</CardDescription>
-                            </div>
-                            <Shirt className="h-5 w-5 text-muted-foreground" />
-                        </CardHeader>
-                        <CardContent className="space-y-3">
-                            {layananPopuler.map((item) => (
-                                <div
-                                    key={item.nama}
-                                    className="flex items-center gap-3 rounded-lg border border-border/70 p-3"
-                                >
-                                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-muted text-sm font-semibold">
-                                        {item.porsi}
-                                    </div>
-                                    <div className="flex flex-1 flex-col">
-                                        <p className="font-medium">{item.nama}</p>
-                                        <p className="text-sm text-muted-foreground">
-                                            {item.jumlah} tiket layanan
-                                        </p>
-                                    </div>
-                                    <Badge variant="outline" className="bg-accent/40">
-                                        Stabil
-                                    </Badge>
-                                </div>
-                            ))}
-                        </CardContent>
-                    </Card>
-
-                    <Card>
-                        <CardHeader className="flex flex-row items-center justify-between">
-                            <div>
-                                <CardTitle>Inventaris rendah</CardTitle>
-                                <CardDescription>Segera lakukan restock.</CardDescription>
-                            </div>
-                            <PackageMinus className="h-5 w-5 text-muted-foreground" />
-                        </CardHeader>
-                        <CardContent className="space-y-3">
-                            {stokRendah.map((item) => (
-                                <div
-                                    key={item.nama}
-                                    className="flex items-center justify-between rounded-lg border border-border/70 p-3"
-                                >
-                                    <div>
-                                        <p className="font-medium">{item.nama}</p>
-                                        <p className="text-sm text-muted-foreground">{item.status}</p>
-                                    </div>
-                                    <Badge variant="destructive" className="bg-amber-100 text-amber-900 dark:bg-amber-500/30 dark:text-amber-50">
-                                        Restock
-                                    </Badge>
                                 </div>
                             ))}
                         </CardContent>

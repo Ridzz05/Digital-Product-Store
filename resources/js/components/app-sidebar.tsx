@@ -14,15 +14,11 @@ import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
 import {
-    BadgePercent,
-    BarChart3,
     BookOpen,
+    Box,
     Folder,
     LayoutGrid,
-    Package,
-    ShoppingBag,
-    Truck,
-    Users,
+    Tag,
 } from 'lucide-react';
 import AppLogo from './app-logo';
 
@@ -33,34 +29,14 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
     {
-        title: 'Pesanan',
-        href: '/orders',
-        icon: ShoppingBag,
+        title: 'Produk Digital',
+        href: '/admin/products',
+        icon: Box,
     },
     {
-        title: 'Antar Jemput',
-        href: '/pickups',
-        icon: Truck,
-    },
-    {
-        title: 'Pelanggan',
-        href: '/customers',
-        icon: Users,
-    },
-    {
-        title: 'Layanan & Harga',
-        href: '/services',
-        icon: BadgePercent,
-    },
-    {
-        title: 'Inventaris',
-        href: '/inventory',
-        icon: Package,
-    },
-    {
-        title: 'Laporan',
-        href: '/reports',
-        icon: BarChart3,
+        title: 'Kategori',
+        href: '/admin/categories',
+        icon: Tag,
     },
 ];
 

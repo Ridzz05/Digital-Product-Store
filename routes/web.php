@@ -1,14 +1,24 @@
 <?php
 
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\PublicProductController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
 
+// Public landing page - show products
 Route::get('/', function () {
-    return Inertia::render('welcome', [
+    $products = \App\Models\Product::with('category')->active()->latest()->get();
+    return Inertia::render('products', [
+        'products' => $products,
         'canRegister' => Features::enabled(Features::registration()),
     ]);
 })->name('home');
+
+// Public product routes
+Route::get('/products', [PublicProductController::class, 'index'])->name('products.index');
+Route::get('/products/{product:slug}', [PublicProductController::class, 'show'])->name('products.show');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
@@ -38,6 +48,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('reports', function () {
         return Inertia::render('reports');
     })->name('reports');
+
+    // Admin routes
+    Route::prefix('admin')->name('admin.')->group(function () {
+        // Category management
+        Route::resource('categories', CategoryController::class);
+
+        // Product management
+        Route::resource('products', AdminProductController::class);
+    });
 });
 
-require __DIR__.'/settings.php';
+require __DIR__ . '/settings.php';
